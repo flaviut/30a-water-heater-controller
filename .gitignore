@@ -1,4 +1,5 @@
 fab/*.zip
+*-backups
 
 # Created by https://www.toptal.com/developers/gitignore/api/vim,kicad,linux,macos,python,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=vim,kicad,linux,macos,python,windows
