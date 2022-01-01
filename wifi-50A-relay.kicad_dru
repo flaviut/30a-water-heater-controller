@@ -1,0 +1,11 @@
+(version 1)
+
+# following data from IEC 62368-1 draft 4b table X.1
+# Pollution Degree: 3 (overly conservative, actually probably 2)
+# Voltage RMS: 420V
+(rule HV_HV
+   (constraint clearance (min "2mm"))	
+   (condition "A.NetClass == 'Mains' && B.NetClass == 'Mains'"))
+(rule HV_Def
+   (constraint clearance (min "4mm"))	
+   (condition "(A.NetClass == 'Mains' || B.NetClass == 'Mains') && A.NetClass != B.NetClass"))
