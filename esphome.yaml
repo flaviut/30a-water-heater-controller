@@ -1,0 +1,106 @@
+substitutions:
+  # https://esphome.io/guides/configuration-types.html#substitutions
+  device_name: waterheater # hostname & entity_id
+  friendly_name: Water Heater # Displayed in HA frontend
+
+esphome:
+  # https://esphome.io/components/esphome
+  name: ${device_name}
+  platform: ESP8266
+  board: esp_wroom_02
+
+logger:
+  baud_rate: 0
+
+
+# Enable Home Assistant API
+api: {password: !secret api_password}
+# enable ota updates
+ota: {password: !secret api_password}
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: heater_gpio
+
+switch:
+  - platform: output
+    # https://esphome.io/components/switch/output.html
+    id: heater
+    output: heater_gpio
+
+i2c:
+  sda: 2
+  scl: 14
+  scan: true
+
+ads1115:
+  - address: 0x48
+
+sensor:
+  - platform: ads1115
+    multiplexer: 'A0_GND'
+    gain: 2.048
+    update_interval: 312ms
+    id: adc_top_in
+    filters: [ { sliding_window_moving_average: { window_size: 32, send_every: 32, } } ]
+  - platform: resistance
+    id: res_top_in
+    sensor: adc_top_in
+    configuration: DOWNSTREAM
+    resistor: 100kOhm
+  - platform: ntc
+    id: temp_top
+    sensor: res_top_in
+    name: ${friendly_name} Top Temperature
+    calibration:
+      b_constant: 3950
+      reference_temperature: 25°C
+      reference_resistance: 100kOhm
+
+  - platform: ads1115
+    multiplexer: 'A2_GND'
+    gain: 2.048
+    update_interval: 312ms
+    id: adc_bot_in
+    filters: [ { sliding_window_moving_average: { window_size: 32, send_every: 32, } } ]
+  - platform: resistance
+    id: res_bot_in
+    sensor: adc_bot_in
+    configuration: DOWNSTREAM
+    resistor: 100kOhm
+  - platform: ntc
+    id: temp_bot
+    sensor: res_bot_in
+    name: ${friendly_name} Bottom Temperature
+    calibration:
+      b_constant: 3950
+      reference_temperature: 25°C
+      reference_resistance: 100kOhm
+
+climate:
+  - platform: thermostat
+    id: hot_water_thermostat
+    name: "Hot water heater"
+    sensor: temp_top
+    default_target_temperature_low: 60 °C
+    min_heating_off_time: 0s
+    min_heating_run_time: 300s
+    min_idle_time: 0s
+    default_mode: HEAT
+    visual:
+      max_temperature: 150 °F
+      min_temperature: 120 °F
+    heat_action:
+      - switch.turn_off: heater
+    idle_action:
+      - switch.turn_on: heater
+    # disable turning off the heat
+    off_mode:
+      - climate.control:
+          id: hot_water_thermostat
+          mode: HEAT
