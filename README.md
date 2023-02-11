@@ -2,6 +2,8 @@
 
 This board contains a design for a water heater controller that is good for up to 30A water heaters.
 
+![photo of assembled board](./photo.jpg)
+
 ## Warranty
 
 Working with high currents and mains voltages is dangerous. Death from electrical shock & house fires are both real risks with this project.
