@@ -1707,7 +1707,6 @@
     )
   )
 
-
   (junction (at 182.88 147.32) (diameter 0) (color 0 0 0 0)
     (uuid 0d993e48-cea3-4104-9c5a-d8f97b64a3ac)
   )
@@ -2306,7 +2305,7 @@
     (property "Value" "J115F21C12VDCS.9" (id 1) (at 230.632 48.133 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "wifi-50A-relay:Relay_SPDT_CIT-J115F2" (id 2) (at 231.14 48.26 0)
+    (property "Footprint" "wifi-30A-relay:Relay_SPDT_CIT-J115F2" (id 2) (at 231.14 48.26 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "https://www.citrelay.com/Catalog%20Pages/RelayCatalog/J115F2.pdf" (id 3) (at 236.22 50.8 0)
@@ -2328,7 +2327,7 @@
     (property "Value" "J115F21C12VDCS.9" (id 1) (at 188.722 48.133 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "wifi-50A-relay:Relay_SPDT_CIT-J115F2" (id 2) (at 189.23 48.26 0)
+    (property "Footprint" "wifi-30A-relay:Relay_SPDT_CIT-J115F2" (id 2) (at 189.23 48.26 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "https://www.citrelay.com/Catalog%20Pages/RelayCatalog/J115F2.pdf" (id 3) (at 194.31 50.8 0)
@@ -4097,10 +4096,10 @@
       (reference "J3") (unit 1) (value "100k_COLD") (footprint "Connector_JST:JST_XH_B2B-XH-AM_1x02_P2.50mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-000061161134"
-      (reference "K1") (unit 1) (value "J115F21C12VDCS.9") (footprint "wifi-50A-relay:Relay_SPDT_CIT-J115F2")
+      (reference "K1") (unit 1) (value "J115F21C12VDCS.9") (footprint "wifi-30A-relay:Relay_SPDT_CIT-J115F2")
     )
     (path "/00000000-0000-0000-0000-00006115ee47"
-      (reference "K2") (unit 1) (value "J115F21C12VDCS.9") (footprint "wifi-50A-relay:Relay_SPDT_CIT-J115F2")
+      (reference "K2") (unit 1) (value "J115F21C12VDCS.9") (footprint "wifi-30A-relay:Relay_SPDT_CIT-J115F2")
     )
     (path "/00000000-0000-0000-0000-00006117b67d"
       (reference "L1") (unit 1) (value "33u") (footprint "Inductor_SMD:L_TDK_SLF6028")
